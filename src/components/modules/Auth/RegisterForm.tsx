@@ -11,6 +11,7 @@ import { axiosInstance } from '@utils'
 import { useRouter } from 'next/navigation'
 
 import React, { useState } from 'react'
+import toast from 'react-hot-toast'
 
 export const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -41,11 +42,12 @@ export const RegisterForm = () => {
       .post('/auth/register', formData)
       .then((res) => {
         if (res.status == 200) {
+          toast.success('Registration sucess.')
           router.push('/login')
         }
       })
       .catch((error) => {
-        alert(error?.response?.data?.detail ?? 'Something went wrong')
+        toast.error(error?.response?.data?.detail ?? 'Something went wrong')
       })
   }
   return (
@@ -113,7 +115,7 @@ export const RegisterForm = () => {
           />
           <FormControlLabel value="Admin" control={<Radio />} label="Admin" />
         </RadioGroup>
-        <Button variant="contained" onClick={(e) => handleSubmit(e)}>
+        <Button variant="outlined" onClick={(e) => handleSubmit(e)}>
           Register
         </Button>
       </form>
