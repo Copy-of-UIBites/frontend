@@ -22,11 +22,13 @@ export const KantinDetail: FC<KantinDetailProps> = ({ kantin }) => {
       </Typography>
 
       <Typography variant="h6" gutterBottom>
-        <p className="font-bold">Lokasi:</p> {lokasi}
+        <span className="font-bold">Lokasi:</span> <br />
+        {lokasi}
       </Typography>
       <Typography variant="body1" gutterBottom>
-        <p className="font-bold">Deskripsi:</p>
-        <p>{deskripsi}</p>
+        <span className="font-bold">Deskripsi:</span>
+        <br />
+        {deskripsi}
       </Typography>
 
       <TableContainer component={Paper} className="mt-4">
