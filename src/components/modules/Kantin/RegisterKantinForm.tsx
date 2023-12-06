@@ -2,6 +2,7 @@
 import { MultiTextfield } from '@elements'
 import { Button, TextField } from '@mui/material'
 import { axiosInstance } from '@utils'
+import { useRouter } from 'next/navigation'
 
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
@@ -22,7 +23,7 @@ export const RegisterKantinForm = () => {
       [name]: value,
     }))
   }
-
+  const router = useRouter()
   const handleSubmit = async (e: any) => {
     e.preventDefault()
 
@@ -31,8 +32,9 @@ export const RegisterKantinForm = () => {
     axiosInstance
       .post('/kantin/register', formData)
       .then((res) => {
-        if (res.status == 200) {
+        if (res.status == 201) {
           toast.success('Registration sucess.')
+          router.push('/')
         }
       })
       .catch((error) => {
