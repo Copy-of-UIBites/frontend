@@ -24,7 +24,7 @@ interface UserProviderProps {
 export const UserProvider: FC<UserProviderProps> = ({ children }) => {
   const pathname = usePathname()
   const [user, setUser] = useState<UserInformation | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -35,6 +35,7 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
         setIsLoading(false)
       } else {
         // Function to fetch user profile
+        setIsLoading(true)
         const fetchUserProfile = async () => {
           try {
             const response = await axiosInstance.get('/auth/profile')
