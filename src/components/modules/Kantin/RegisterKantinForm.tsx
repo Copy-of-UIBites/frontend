@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation'
 
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
+import { AddMenuField } from './AddMenuField'
+import { Menu } from './type'
 
 export const RegisterKantinForm = () => {
   const [formData, setFormData] = useState({
@@ -13,8 +15,9 @@ export const RegisterKantinForm = () => {
     lokasi: '',
     deskripsi: '',
     list_foto: [''],
+    menu: [{}],
   })
-
+  const [menuList, setMenuList] = useState<Menu[]>([])
   const [fotoUrls, setFotoUrls] = useState<string[]>([])
   const handleChange = (e: any) => {
     const { name, value } = e.target
@@ -28,7 +31,8 @@ export const RegisterKantinForm = () => {
     e.preventDefault()
 
     formData.list_foto = fotoUrls
-    console.log(formData)
+    formData.menu = menuList
+
     axiosInstance
       .post('/kantin/register', formData)
       .then((res) => {
@@ -80,7 +84,7 @@ export const RegisterKantinForm = () => {
           fields={fotoUrls}
           setFields={setFotoUrls}
         />
-
+        <AddMenuField fields={menuList} setFields={setMenuList} />
         <Button variant="outlined" onClick={(e) => handleSubmit(e)}>
           Register Kantin
         </Button>
