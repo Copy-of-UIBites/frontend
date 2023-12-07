@@ -1,26 +1,21 @@
-/* eslint-disable no-unused-vars */
 'use client'
-import { useUserProfile } from '@contexts'
-import { CircularProgress } from '@mui/material'
-import React from 'react'
+
+import { CircularProgress, Typography } from '@mui/material'
+import React, { Suspense } from 'react'
+import { GetKantinList } from './GetKantinList'
 
 export const Home = () => {
-  // get the current user's profile
-  const { user, isLoading } = useUserProfile()
-
   return (
     <div>
-      {!isLoading ? (
-        <div>
-          <p>Welcome {user?.nama}</p>
-          <p>Role {user?.role}</p>
-          {/* TODO: Show homepage berdasarkan role */}
-        </div>
-      ) : (
-        <div className="flex items-center justify-center inset-0 h-full w-full">
-          <CircularProgress />
-        </div>
-      )}
+      <div className="flex flex-col gap-4">
+        <Typography variant="h4" className="font-bold">
+          Welcome to UIBites
+        </Typography>
+        <Typography variant="h5">Click and explore these Canteens</Typography>
+        <Suspense fallback={<CircularProgress />}>
+          <GetKantinList />
+        </Suspense>
+      </div>
     </div>
   )
 }
