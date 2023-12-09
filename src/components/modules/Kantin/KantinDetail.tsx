@@ -44,7 +44,7 @@ export const KantinDetail: FC<KantinDetailProps> = ({
         if (addToFavorites && favoritesResponse) {
           const favorites = favoritesResponse.data
           const isInFavorites = favorites.some(
-            (favorite: { id: string }) => String(favorite.id) === kantin.id
+            (favorite: { id: string }) => favorite.id == kantin.id
           )
           setIsInFavorites(isInFavorites)
         }
