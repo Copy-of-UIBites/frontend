@@ -9,12 +9,13 @@ export const Navbar = () => {
   const { user } = useUserProfile()
   const router = useRouter()
   return (
-    <div className="bg-white fixed h-16 w-full flex flex-row items-center justify-between p-4 shadow-md">
+    <div className="bg-rose-50 fixed w-full flex flex-row items-center justify-between px-10 py-4 shadow-md">
       <Typography
         variant="h4"
         className="font-bold text-blue-700 drop-shadow-md"
       >
-        UIBites
+        <span className="text-yellow-400">UI</span>
+        Bites 🤤
       </Typography>
       {!!user ? (
         <div className="flex flex-row gap-4 items-center">

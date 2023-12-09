@@ -13,7 +13,7 @@ export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
       <UserProvider>
         <>
           <Navbar />
-          <div className="pt-20 px-4">{children}</div>
+          <div className="pt-24 px-10">{children}</div>
         </>
       </UserProvider>
     </div>
