@@ -39,8 +39,8 @@ export const LoginForm = () => {
       })
   }
   return (
-    <div>
-      <form className="grid grid-cols-1 gap-3 items-center p-3">
+    <div className="h-[84vh] w-full flex items-center justify-center">
+      <form className="grid grid-cols-1 gap-3 items-center p-3 w-1/3">
         <TextField
           id="outlined-basic"
           label="Email"
