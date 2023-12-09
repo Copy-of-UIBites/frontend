@@ -11,7 +11,7 @@ export const OwnerKantinProfile = async () => {
   return (
     <div>
       <div>
-        <KantinDetail kantin={data} />
+        <KantinDetail kantin={data} addToFavorites={false} />
         <Button
           className="flex justify-end"
           variant="outlined"

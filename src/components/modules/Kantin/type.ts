@@ -5,6 +5,7 @@ export type Menu = {
 }
 
 export type Kantin = {
+  id: string
   nama: string
   lokasi: string
   deskripsi: string
@@ -13,4 +14,11 @@ export type Kantin = {
   menu: Menu[]
 }
 
-export type Ulasan = {}
+export type Ulasan = {
+  kantin: Kantin
+  time: string
+  review: string
+  rating: number
+  foto: string[]
+  user: number
+}

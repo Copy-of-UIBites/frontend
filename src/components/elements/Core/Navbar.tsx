@@ -3,7 +3,7 @@ import React from 'react'
 import { LogoutButton } from './LogoutButton'
 import { useUserProfile } from '@contexts'
 import { Button, Typography } from '@mui/material'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 export const Navbar = () => {
   const { user } = useUserProfile()
