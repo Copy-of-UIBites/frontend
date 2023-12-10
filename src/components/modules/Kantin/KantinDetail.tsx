@@ -47,6 +47,9 @@ export const KantinDetail: FC<KantinDetailProps> = ({ kantin }) => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
+                  {row.nama}
+                </TableCell>
+                <TableCell align="right" component="th" scope="row">
                   {row.deskripsi}
                 </TableCell>
                 <TableCell align="right">{row.harga}</TableCell>

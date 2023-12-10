@@ -27,7 +27,7 @@ export const MultiTextfield: FC<MultiTextfieldProps> = ({
     <div className="flex flex-col gap-2 items-start justify-start">
       <FormLabel>{label}</FormLabel>
       {fields.map((field, index) => (
-        <Grid spacing={0} key={index}>
+        <Grid key={index}>
           <Grid item xs={10} padding={1}>
             <TextField
               fullWidth

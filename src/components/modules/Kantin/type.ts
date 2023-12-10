@@ -5,6 +5,7 @@ export type Menu = {
 }
 
 export type Kantin = {
+  id: number
   nama: string
   lokasi: string
   deskripsi: string
