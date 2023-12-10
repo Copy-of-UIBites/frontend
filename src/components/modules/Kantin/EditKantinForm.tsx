@@ -6,6 +6,7 @@ import React, { FC, useState } from 'react'
 import toast from 'react-hot-toast'
 import { AddMenuField } from './AddMenuField'
 import { Kantin, Menu } from './type'
+import { useRouter } from 'next/navigation'
 
 interface EditKantinFormProps {
   kantin: Kantin
@@ -25,6 +26,7 @@ export const EditKantinForm: FC<EditKantinFormProps> = ({
       [name]: value,
     }))
   }
+  const router = useRouter()
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
@@ -35,9 +37,10 @@ export const EditKantinForm: FC<EditKantinFormProps> = ({
     axiosInstance
       .post('/kantin/edit', formData)
       .then((res) => {
-        if (res.status == 201) {
+        if (res.status == 200) {
           toast.success('Kantin updated!')
           setIsEdit(false)
+          router.refresh()
         }
       })
       .catch((error) => {

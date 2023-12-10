@@ -1,37 +1,50 @@
 'use client'
-import { axiosInstance } from '@utils'
-import React, { useState } from 'react'
-import { Kantin } from './type'
+
+import React, { useEffect, useState } from 'react'
+
 import { Button } from '@mui/material'
-import { KantinDetail } from './KantinDetail'
+
 import { EditKantinForm } from './EditKantinForm'
 
-export const OwnerKantinProfile = async () => {
-  const res = await axiosInstance.get('/auth/kantin/me')
-  const data = res.data as Kantin
+import { axiosInstance } from '@utils'
+import { Kantin } from './type'
+import { KantinDetail } from './KantinDetail'
 
+export const OwnerKantinProfile = () => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
+  const [kantinData, setKantinData] = useState<Kantin | null>(null)
+
+  useEffect(() => {
+    axiosInstance.get('/auth/kantin/me').then((res) => {
+      if (res.status == 200) {
+        const data = res.data as Kantin
+        setKantinData(data)
+      }
+    })
+  }, [])
 
   return (
     <div>
       <div>
-        {!isEdit ? (
+        {!!kantinData && !isEdit ? (
           <div>
-            <KantinDetail kantin={data} addToFavorites={false} />
+            <KantinDetail kantin={kantinData} addToFavorites={false} />
             <Button
-              className="flex justify-end"
+              className="flex my-4"
               variant="outlined"
               onClick={() => {
-                setIsEdit(isEdit)
+                setIsEdit(!isEdit)
               }}
             >
               Edit
             </Button>
           </div>
         ) : (
-          <div>
-            <EditKantinForm kantin={data} setIsEdit={setIsEdit} />
-          </div>
+          !!kantinData && (
+            <div className="py-2">
+              <EditKantinForm kantin={kantinData} setIsEdit={setIsEdit} />
+            </div>
+          )
         )}
       </div>
     </div>

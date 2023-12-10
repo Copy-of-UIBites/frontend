@@ -17,7 +17,7 @@ export const Navbar = () => {
         <span className="text-yellow-400">UI</span>
         Bites 🤤
       </Typography>
-      {!!user ? (
+      {!user ? (
         <div className="flex flex-row gap-4 items-center">
           <Button
             variant="outlined"
