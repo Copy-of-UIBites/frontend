@@ -29,7 +29,7 @@ export const OwnerKantinProfile = () => {
       <div>
         {!!kantinData && !isEdit ? (
           <div>
-            <KantinDetail kantin={kantinData} />
+            <KantinDetail kantin={kantinData} addToFavorites={false} />
             <Button
               className="flex my-4"
               variant="outlined"

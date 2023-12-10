@@ -14,7 +14,7 @@ export const PublicKantinProfile: FC<PublicKantinProfileProps> = async ({
 
   return (
     <div>
-      <KantinDetail kantin={data} />
+      <KantinDetail kantin={data} addToFavorites={true} />
     </div>
   )
 }
