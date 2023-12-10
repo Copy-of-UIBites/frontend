@@ -9,11 +9,12 @@ import { EditKantinForm } from './EditKantinForm'
 import { axiosInstance } from '@utils'
 import { Kantin } from './type'
 import { KantinDetail } from './KantinDetail'
+import { useRouter } from 'next/navigation'
 
 export const OwnerKantinProfile = () => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [kantinData, setKantinData] = useState<Kantin | null>(null)
-
+  const router = useRouter()
   useEffect(() => {
     axiosInstance.get('/auth/kantin/me').then((res) => {
       if (res.status == 200) {
@@ -39,10 +40,21 @@ export const OwnerKantinProfile = () => {
               Edit
             </Button>
           </div>
+        ) : !!kantinData && isEdit ? (
+          <div className="py-2">
+            <EditKantinForm kantin={kantinData} setIsEdit={setIsEdit} />
+          </div>
         ) : (
-          !!kantinData && (
-            <div className="py-2">
-              <EditKantinForm kantin={kantinData} setIsEdit={setIsEdit} />
+          !kantinData && (
+            <div>
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  router.push('/kantin/register')
+                }}
+              >
+                Register Kantin
+              </Button>
             </div>
           )
         )}

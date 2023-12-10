@@ -1,7 +1,7 @@
 'use client'
 
-import { CircularProgress, Typography } from '@mui/material'
-import React, { Suspense } from 'react'
+import { Typography } from '@mui/material'
+import React from 'react'
 import { GetKantinList } from './GetKantinList'
 
 export const Home = () => {
@@ -12,9 +12,8 @@ export const Home = () => {
           Welcome to UIBites
         </Typography>
         <Typography variant="h5">Click and explore these Canteens</Typography>
-        <Suspense fallback={<CircularProgress />}>
-          <GetKantinList />
-        </Suspense>
+
+        <GetKantinList />
       </div>
     </div>
   )

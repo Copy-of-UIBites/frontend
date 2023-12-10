@@ -81,7 +81,7 @@ export const KantinDetail: FC<KantinDetailProps> = ({
   if (addToFavorites && isInFavorites === null) {
     return <CircularProgress />
   }
-
+    
   return (
     <div>
       <Typography variant="h3" gutterBottom>
@@ -96,6 +96,11 @@ export const KantinDetail: FC<KantinDetailProps> = ({
         <span className="font-bold">Deskripsi:</span>
         <br />
         {deskripsi}
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        <span className="font-bold">Status:</span>
+        <br />
+        {status_verifikasi}
       </Typography>
 
       {addToFavorites && (
