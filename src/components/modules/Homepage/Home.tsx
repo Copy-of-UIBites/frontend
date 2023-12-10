@@ -12,6 +12,7 @@ export const Home = () => {
           Welcome to UIBites
         </Typography>
         <Typography variant="h5">Click and explore these Canteens</Typography>
+
         <Suspense fallback={<CircularProgress />}>
           <GetKantinList />
         </Suspense>

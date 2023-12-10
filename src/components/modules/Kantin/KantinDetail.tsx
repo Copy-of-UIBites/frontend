@@ -14,7 +14,7 @@ interface KantinDetailProps {
   kantin: Kantin
 }
 export const KantinDetail: FC<KantinDetailProps> = ({ kantin }) => {
-  const { nama, deskripsi, lokasi, menu } = kantin
+  const { nama, deskripsi, lokasi, menu, status_verifikasi } = kantin
   return (
     <div>
       <Typography variant="h3" gutterBottom>
@@ -29,6 +29,11 @@ export const KantinDetail: FC<KantinDetailProps> = ({ kantin }) => {
         <span className="font-bold">Deskripsi:</span>
         <br />
         {deskripsi}
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        <span className="font-bold">Status:</span>
+        <br />
+        {status_verifikasi}
       </Typography>
 
       <TableContainer component={Paper} className="mt-4">
