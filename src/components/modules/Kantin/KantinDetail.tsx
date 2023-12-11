@@ -1,3 +1,4 @@
+'use client'
 import React, { FC } from 'react'
 import {
   Typography,
@@ -36,10 +37,20 @@ export const KantinDetail: FC<KantinDetailProps> = ({
   React.useEffect(() => {
     const fetchData = async () => {
       try {
+        const token = window.localStorage.getItem('token')
+        console.log(token)
         const [ulasanResponse, favoritesResponse] = await Promise.all([
-          axiosInstance.get(`/kantin/ulasan/${kantin.id}`),
+          axiosInstance.get(`/kantin/ulasan/${kantin.id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
           addToFavorites
-            ? axiosInstance.get('/kantin/daftar-kantin-favorit/')
+            ? axiosInstance.get('/kantin/daftar-kantin-favorit/', {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              })
             : Promise.resolve(null),
         ])
 

@@ -1,6 +1,6 @@
 'use client'
 import { TextField, Button } from '@mui/material'
-import { axiosInstance } from '@utils'
+import { axiosInstance, validateForm } from '@utils'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
@@ -22,21 +22,22 @@ export const LoginForm = () => {
   const router = useRouter()
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-
-    axiosInstance
-      .post('/auth/login', formData)
-      .then((res) => {
-        if (res.status == 200) {
-          const data = res.data
-          window.localStorage.setItem('token', data?.access ?? '')
-          window.localStorage.setItem('refresh', data?.refresh ?? '')
-          toast.success('Login sucess.')
-          router.push('/')
-        }
-      })
-      .catch((error) => {
-        toast.error(error?.response?.data?.detail ?? 'Something went wrong')
-      })
+    if (validateForm(formData)) {
+      axiosInstance
+        .post('/auth/login', formData)
+        .then((res) => {
+          if (res.status == 200) {
+            const data = res.data
+            window.localStorage.setItem('token', data?.access ?? '')
+            window.localStorage.setItem('refresh', data?.refresh ?? '')
+            toast.success('Login sucess.')
+            router.push('/')
+          }
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.detail ?? 'Something went wrong')
+        })
+    }
   }
   return (
     <div className="h-[84vh] w-full flex items-center justify-center">
@@ -50,6 +51,7 @@ export const LoginForm = () => {
           value={formData.username}
           onChange={handleChange}
           required
+          error={!formData.username}
         />
         <TextField
           id="outlined-basic"
@@ -60,6 +62,7 @@ export const LoginForm = () => {
           value={formData.password}
           onChange={handleChange}
           required
+          error={!formData.password}
         />
         <Button variant="outlined" onClick={(e) => handleSubmit(e)}>
           Login

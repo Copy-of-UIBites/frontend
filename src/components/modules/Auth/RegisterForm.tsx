@@ -6,7 +6,7 @@ import {
   RadioGroup,
   TextField,
 } from '@mui/material'
-import { axiosInstance } from '@utils'
+import { axiosInstance, validateForm } from '@utils'
 
 import { useRouter } from 'next/navigation'
 
@@ -38,17 +38,19 @@ export const RegisterForm = () => {
     if (formData.role == 'Admin') {
       formData.is_admin = true
     }
-    axiosInstance
-      .post('/auth/register', formData)
-      .then((res) => {
-        if (res.status == 200) {
-          toast.success('Registration sucess.')
-          router.push('/login')
-        }
-      })
-      .catch((error) => {
-        toast.error(error?.response?.data?.detail ?? 'Something went wrong')
-      })
+    if (validateForm(formData)) {
+      axiosInstance
+        .post('/auth/register', formData)
+        .then((res) => {
+          if (res.status == 200) {
+            toast.success('Registration sucess.')
+            router.push('/login')
+          }
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.detail ?? 'Something went wrong')
+        })
+    }
   }
   return (
     <div className="my-2">
@@ -62,6 +64,7 @@ export const RegisterForm = () => {
           value={formData.email}
           onChange={handleChange}
           required
+          error={!formData.email}
         />
         <TextField
           id="outlined-basic"
@@ -72,6 +75,7 @@ export const RegisterForm = () => {
           value={formData.password}
           onChange={handleChange}
           required
+          error={!formData.password}
         />
         <TextField
           id="outlined-basic"
@@ -81,6 +85,7 @@ export const RegisterForm = () => {
           value={formData.nama}
           onChange={handleChange}
           required
+          error={!formData.nama}
         />
         <TextField
           id="outlined-basic"
@@ -90,6 +95,7 @@ export const RegisterForm = () => {
           value={formData.nomor_telepon}
           onChange={handleChange}
           required
+          error={!formData.nomor_telepon}
         />
         <TextField
           id="outlined-basic"
@@ -99,6 +105,7 @@ export const RegisterForm = () => {
           value={formData.foto}
           onChange={handleChange}
           required
+          error={!formData.foto}
         />
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"

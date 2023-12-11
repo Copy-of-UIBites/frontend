@@ -1,7 +1,7 @@
 'use client'
 import { MultiTextfield } from '@elements'
 import { TextField, Button } from '@mui/material'
-import { axiosInstance } from '@utils'
+import { axiosInstance, validateForm } from '@utils'
 import React, { FC, useState } from 'react'
 import toast from 'react-hot-toast'
 import { AddMenuField } from './AddMenuField'
@@ -33,19 +33,20 @@ export const EditKantinForm: FC<EditKantinFormProps> = ({
 
     formData.list_foto = fotoUrls
     formData.menu = menuList
-
-    axiosInstance
-      .post('/kantin/edit', formData)
-      .then((res) => {
-        if (res.status == 200) {
-          toast.success('Kantin updated!')
-          setIsEdit(false)
-          router.refresh()
-        }
-      })
-      .catch((error) => {
-        toast.error(error?.response?.data?.detail ?? 'Something went wrong')
-      })
+    if (validateForm(formData)) {
+      axiosInstance
+        .post('/kantin/edit', formData)
+        .then((res) => {
+          if (res.status == 200) {
+            toast.success('Kantin updated!')
+            setIsEdit(false)
+            router.refresh()
+          }
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.detail ?? 'Something went wrong')
+        })
+    }
   }
   return (
     <div>
@@ -61,6 +62,7 @@ export const EditKantinForm: FC<EditKantinFormProps> = ({
           value={formData.nama}
           onChange={handleChange}
           required
+          error={!formData.nama}
         />
         <TextField
           id="outlined-basic"
@@ -80,6 +82,7 @@ export const EditKantinForm: FC<EditKantinFormProps> = ({
           onChange={handleChange}
           multiline
           required
+          error={!formData.deskripsi}
         />
         <MultiTextfield
           label="Foto kantin"

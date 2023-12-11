@@ -1,7 +1,7 @@
 'use client'
 import { MultiTextfield } from '@elements'
 import { Button, TextField } from '@mui/material'
-import { axiosInstance } from '@utils'
+import { axiosInstance, validateForm } from '@utils'
 import { useRouter } from 'next/navigation'
 
 import React, { useState } from 'react'
@@ -32,18 +32,19 @@ export const RegisterKantinForm = () => {
 
     formData.list_foto = fotoUrls
     formData.menu = menuList
-
-    axiosInstance
-      .post('/kantin/register', formData)
-      .then((res) => {
-        if (res.status == 201) {
-          toast.success('Registration sucess.')
-          router.push('/kantin/me')
-        }
-      })
-      .catch((error) => {
-        toast.error(error?.response?.data?.detail ?? 'Something went wrong')
-      })
+    if (validateForm(formData)) {
+      axiosInstance
+        .post('/kantin/register', formData)
+        .then((res) => {
+          if (res.status == 201) {
+            toast.success('Registration sucess.')
+            router.push('/kantin/me')
+          }
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.detail ?? 'Something went wrong')
+        })
+    }
   }
   return (
     <div className="my-2 py-10">
@@ -59,6 +60,7 @@ export const RegisterKantinForm = () => {
           value={formData.nama}
           onChange={handleChange}
           required
+          error={!formData.nama}
         />
         <TextField
           id="outlined-basic"
@@ -68,6 +70,7 @@ export const RegisterKantinForm = () => {
           value={formData.lokasi}
           onChange={handleChange}
           required
+          error={!formData.lokasi}
         />
         <TextField
           id="outlined-basic"
@@ -78,6 +81,7 @@ export const RegisterKantinForm = () => {
           onChange={handleChange}
           multiline
           required
+          error={!formData.deskripsi}
         />
         <MultiTextfield
           label="Foto kantin"
