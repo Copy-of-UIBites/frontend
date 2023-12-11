@@ -68,7 +68,7 @@ export const GetKantinList = () => {
                 idx
               ) => {
                 return (
-                  <Link href={`/kantin/${id}`} key={idx}>
+                  <Link href={`/kantin/${id}`} key={id}>
                     <Card className="px-4 py-4 h-72 w-64 rounded-lg">
                       <CardContent className="flex flex-col gap-4">
                         <Typography variant="h5" component="div">
