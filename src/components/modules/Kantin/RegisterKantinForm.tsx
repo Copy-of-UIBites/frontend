@@ -38,7 +38,7 @@ export const RegisterKantinForm = () => {
       .then((res) => {
         if (res.status == 201) {
           toast.success('Registration sucess.')
-          router.push('/')
+          router.push('/kantin/me')
         }
       })
       .catch((error) => {

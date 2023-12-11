@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 
 import { EditKantinForm } from './EditKantinForm'
 
@@ -24,6 +24,13 @@ export const OwnerKantinProfile = () => {
     })
   }, [])
 
+  const handleDelete = () => {
+    axiosInstance.delete('/auth/kantin/me').then((res) => {
+      if (res.status == 200) {
+      }
+    })
+  }
+
   return (
     <div>
       <div>
@@ -36,9 +43,28 @@ export const OwnerKantinProfile = () => {
               onClick={() => {
                 setIsEdit(!isEdit)
               }}
+              disabled={kantinData.status_verifikasi == 'Tidak terverifikasi'}
             >
               Edit
             </Button>
+            {kantinData.status_verifikasi == 'Tidak terverifikasi' && (
+              <div className="flex flex-col gap-3">
+                <Typography variant="body1">
+                  Kantin tidak terverifikasi, hapus kantin untuk registrasi
+                  kantin baru.
+                </Typography>
+                <Button
+                  className="flex my-1"
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => {
+                    handleDelete()
+                  }}
+                >
+                  Delete
+                </Button>
+              </div>
+            )}
           </div>
         ) : !!kantinData && isEdit ? (
           <div className="py-2">
