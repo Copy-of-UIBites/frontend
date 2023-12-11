@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { Kantin } from './type'
 import { KantinDetail } from './KantinDetail'
 import { useUserProfile } from '@contexts'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 interface PublicKantinProfileProps {
   id: string
@@ -14,6 +14,7 @@ export const PublicKantinProfile: FC<PublicKantinProfileProps> = ({ id }) => {
   const { user } = useUserProfile()
   const [addToFavorites, setAddToFavorites] = React.useState<boolean>(false)
 
+  const router = useRouter()
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,7 +24,7 @@ export const PublicKantinProfile: FC<PublicKantinProfileProps> = ({ id }) => {
         setAddToFavorites(user?.role === 'User' ? true : false)
       } catch (error) {
         console.error('Error fetching kantin data:', error)
-        redirect('/')
+        router.push('/')
       }
     }
 
