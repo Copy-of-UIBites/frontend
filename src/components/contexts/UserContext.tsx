@@ -29,6 +29,7 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
+
     if (!user && !AUTH_URL.includes(pathname) && !!token) {
       const storedUserData = localStorage.getItem('user')
       if (storedUserData) {
@@ -39,7 +40,11 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
         setIsLoading(true)
         const fetchUserProfile = async () => {
           try {
-            const response = await axiosInstance.get('/auth/profile')
+            const response = await axiosInstance.get('/auth/profile', {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
             localStorage.setItem('user', JSON.stringify(response.data))
             setUser(response.data)
             setIsLoading(false)
@@ -52,7 +57,7 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
         fetchUserProfile()
       }
     }
-  }, [])
+  }, [pathname])
 
   const logout = () => {
     if (typeof window !== 'undefined') {

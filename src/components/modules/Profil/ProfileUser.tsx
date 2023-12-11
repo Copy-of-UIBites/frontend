@@ -14,7 +14,7 @@ import { KantinFavorit } from './KantinFavorit'
 
 export const ProfileUser = () => {
   const { user } = useUserProfile()
-  console.log(user)
+
   const router = useRouter()
   return (
     <div>
