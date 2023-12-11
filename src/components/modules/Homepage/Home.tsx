@@ -17,7 +17,7 @@ export const Home = () => {
 
         <GetKantinList />
 
-        <CanVerifyKantin/>
+        <CanVerifyKantin />
       </div>
     </div>
   )

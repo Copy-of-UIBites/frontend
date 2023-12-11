@@ -6,11 +6,14 @@ export const CanVerifyKantin = () => {
   return (
     <div>
       {useUserProfile().user?.is_admin == true ? (
-        <Button 
-        variant="outlined"
-        onClick={()=>{window.location.replace('/kantin/verification')}}>
-        Verify Canteen
-      </Button>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            window.location.replace('/kantin/verification')
+          }}
+        >
+          Verify Canteen
+        </Button>
       ) : (
         <></>
       )}
