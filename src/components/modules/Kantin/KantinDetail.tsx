@@ -18,6 +18,8 @@ import { Kantin } from './type'
 import { axiosInstance } from '@utils'
 import { UlasanDetail } from './UlasanDetail'
 import { AddUlasanForm } from './AddUlasanForm'
+import { useUserProfile } from '@contexts'
+import toast from 'react-hot-toast'
 
 interface KantinDetailProps {
   kantin: Kantin
@@ -31,21 +33,17 @@ export const KantinDetail: FC<KantinDetailProps> = ({
   const { nama, deskripsi, lokasi, menu, status_verifikasi } = kantin
   const [ulasanList, setUlasanList] = React.useState([])
   const [isInFavorites, setIsInFavorites] = React.useState(false)
-
+  const { user } = useUserProfile()
   const [isOpenReviewForm, setIsOpenReviewForm] = React.useState(false)
 
   React.useEffect(() => {
     const fetchData = async () => {
       try {
         const token = window.localStorage.getItem('token')
-        console.log(token)
+
         const [ulasanResponse, favoritesResponse] = await Promise.all([
-          axiosInstance.get(`/kantin/ulasan/${kantin.id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }),
-          addToFavorites
+          axiosInstance.get(`/kantin/ulasan/${kantin.id}`),
+          !!token && addToFavorites
             ? axiosInstance.get('/kantin/daftar-kantin-favorit/', {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -163,9 +161,15 @@ export const KantinDetail: FC<KantinDetailProps> = ({
       <Button
         variant="outlined"
         onClick={() => {
-          setIsOpenReviewForm(true)
+          if (!!user){
+
+            setIsOpenReviewForm(true)
+          }else{
+            toast.error("Login to write a review")
+          }
         }}
         className="mb-4 mt-4"
+
       >
         Add Review
       </Button>

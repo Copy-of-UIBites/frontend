@@ -1,4 +1,3 @@
-'use client'
 import axios from 'axios'
 
 // Function to get the token and return headers
