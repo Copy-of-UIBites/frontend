@@ -31,7 +31,15 @@ export const KantinFavorit: FC<KantinFavoritProps> = ({ role }) => {
       {role == 'User' ? (
         <div>
           <Typography variant="h4">Daftar Kantin Favorit ⭐️</Typography>
-          <KantinList kantins={kantins} />
+          {kantins.length > 0 ? (
+            <KantinList kantins={kantins} />
+          ) : (
+            <div>
+              <Typography variant="h6">
+                Kamu belum ada kantin favorit.
+              </Typography>
+            </div>
+          )}
         </div>
       ) : (
         <div></div>
