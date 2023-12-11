@@ -14,10 +14,12 @@ export const KantinFavorit: FC<KantinFavoritProps> = ({ role }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get(
-          `/kantin/daftar-kantin-favorit`
-        )
-        setKantins(response.data)
+        if (role == 'User') {
+          const response = await axiosInstance.get(
+            `/kantin/daftar-kantin-favorit`
+          )
+          setKantins(response.data)
+        }
       } catch (error) {
         console.error('Error fetching user favorites:', error)
       }

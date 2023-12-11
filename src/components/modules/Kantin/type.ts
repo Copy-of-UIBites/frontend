@@ -16,6 +16,7 @@ export type Kantin = {
 
 export type Ulasan = {
   kantin: Kantin
+  id: string
   time: string
   review: string
   rating: number
