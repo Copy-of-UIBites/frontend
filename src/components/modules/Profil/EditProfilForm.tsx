@@ -1,12 +1,5 @@
 'use client'
-import {
-  Button,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { Button, TextField, Typography } from '@mui/material'
 import { axiosInstance } from '@utils'
 
 import { useRouter } from 'next/navigation'
@@ -21,7 +14,7 @@ export const EditProfilForm = () => {
 
   const userData = {
     nama: user?.nama ?? '', // Initialize fields properly
-    foto: user?.foto ??'',
+    foto: user?.foto ?? '',
     nomor_telepon: user?.nomor_telepon ?? '',
   }
 

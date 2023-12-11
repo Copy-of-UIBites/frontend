@@ -16,16 +16,19 @@ export const VerifyCanteen = () => {
     window.location.replace('/')
   }
   React.useEffect(() => {
-    axiosInstance.get(`/kantin/unverified`).then((res) => {
-      if (res.status == 200) {
-        setCanteens(res.data)
-      }
-    }).catch((error)=>{
-      toast.error(error.response.data.detail)
-      if(error.response.status == 403){
-        setTimeout(redirectHome, 1000)
-      }
-    })
+    axiosInstance
+      .get(`/kantin/unverified`)
+      .then((res) => {
+        if (res.status == 200) {
+          setCanteens(res.data)
+        }
+      })
+      .catch((error) => {
+        toast.error(error.response.data.detail)
+        if (error.response.status == 403) {
+          setTimeout(redirectHome, 1000)
+        }
+      })
   }, [])
 
   const refreshPage = () => {

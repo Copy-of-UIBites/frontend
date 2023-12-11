@@ -161,15 +161,13 @@ export const KantinDetail: FC<KantinDetailProps> = ({
       <Button
         variant="outlined"
         onClick={() => {
-          if (!!user){
-
+          if (!!user) {
             setIsOpenReviewForm(true)
-          }else{
-            toast.error("Login to write a review")
+          } else {
+            toast.error('Login to write a review')
           }
         }}
         className="mb-4 mt-4"
-
       >
         Add Review
       </Button>
