@@ -8,7 +8,6 @@ import { Kantin } from "./type"
 
 export const VerifyCanteen = () => {
     const [canteens, setCanteens] = React.useState<Kantin[]>([])
-    const status = false
     React.useEffect(() => {
         axiosInstance
             .get(`/kantin/unverified`)

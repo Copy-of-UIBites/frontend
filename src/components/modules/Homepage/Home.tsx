@@ -4,7 +4,7 @@ import { Typography } from '@mui/material'
 import React from 'react'
 import { GetKantinList } from './GetKantinList'
 
-import { CanVerifyCanteen } from './CanVerifyCanteen'
+import { CanVerifyKantin } from './CanVerifyKantin'
 
 export const Home = () => {
   return (
@@ -17,7 +17,7 @@ export const Home = () => {
 
         <GetKantinList />
 
-        <CanVerifyCanteen/>
+        <CanVerifyKantin/>
       </div>
     </div>
   )

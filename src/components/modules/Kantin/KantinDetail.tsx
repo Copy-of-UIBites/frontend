@@ -16,7 +16,7 @@ import {
 import { Kantin } from './type'
 import { axiosInstance } from '@utils'
 import { UlasanDetail } from './UlasanDetail'
-import { AddReviewForm } from './AddReviewForm'
+import { AddUlasanForm } from './AddUlasanForm'
 
 
 interface KantinDetailProps {
@@ -175,7 +175,7 @@ export const KantinDetail: FC<KantinDetailProps> = ({
           p: 4,
           borderRadius: 10,
         }}>
-          <AddReviewForm kantin={kantin} />
+          <AddUlasanForm kantin={kantin} />
           <center>
                     <Button
                         variant="outlined"
