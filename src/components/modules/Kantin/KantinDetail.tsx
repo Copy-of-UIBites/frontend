@@ -18,7 +18,6 @@ import { axiosInstance } from '@utils'
 import { UlasanDetail } from './UlasanDetail'
 import { AddUlasanForm } from './AddUlasanForm'
 
-
 interface KantinDetailProps {
   kantin: Kantin
   addToFavorites: boolean
@@ -152,7 +151,9 @@ export const KantinDetail: FC<KantinDetailProps> = ({
 
       <Button
         variant="outlined"
-        onClick={() => { setIsOpenReviewForm(true) }}
+        onClick={() => {
+          setIsOpenReviewForm(true)
+        }}
         className="mb-4 mt-4"
       >
         Add Review
@@ -160,38 +161,54 @@ export const KantinDetail: FC<KantinDetailProps> = ({
 
       <Modal
         open={isOpenReviewForm}
-        onClose={() => { setIsOpenReviewForm(false) }}
+        onClose={() => {
+          setIsOpenReviewForm(false)
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={{
-          position: 'absolute' as 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: 500,
-          bgcolor: 'background.paper',
-          boxShadow: 20,
-          p: 4,
-          borderRadius: 10,
-        }}>
+        <Box
+          sx={{
+            position: 'absolute' as 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 500,
+            bgcolor: 'background.paper',
+            boxShadow: 20,
+            p: 4,
+            borderRadius: 10,
+          }}
+        >
           <AddUlasanForm kantin={kantin} />
           <center>
-                    <Button
-                        variant="outlined"
-                        color='error'
-                        className="mb-4"
-                        onClick={()=>{setIsOpenReviewForm(false)}}
-                    >
-                        Cancel
-                    </Button>
+            <Button
+              variant="outlined"
+              color="error"
+              className="mb-4"
+              onClick={() => {
+                setIsOpenReviewForm(false)
+              }}
+            >
+              Cancel
+            </Button>
           </center>
         </Box>
       </Modal>
 
-      {ulasanList.map((ulasan, index) => (
-        <UlasanDetail key={index} ulasan={ulasan} />
-      ))}
+      <div className="flex flex-col gap-2">
+        <Typography variant="h5">Reviews</Typography>
+
+        {ulasanList.length == 0 ? (
+          <Typography variant="body1" className="text-black/50">
+            No reviews yet
+          </Typography>
+        ) : (
+          ulasanList.map((ulasan, index) => (
+            <UlasanDetail key={index} ulasan={ulasan} />
+          ))
+        )}
+      </div>
     </div>
   )
 }

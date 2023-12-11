@@ -55,7 +55,9 @@ export const GetKantinList = () => {
       {kantinList.length == 0 ? (
         <div className="flex w-full justify-center py-3">
           <Typography variant="h5">
-            Your search did not match any kantin.
+            {searchQuery != ''
+              ? 'Your search did not match any kantin.'
+              : 'No kantin yet.'}
           </Typography>
         </div>
       ) : (
