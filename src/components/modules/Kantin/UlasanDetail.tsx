@@ -10,15 +10,16 @@ import {
 import React, { FC } from 'react'
 import { Ulasan } from './type'
 import { axiosInstance } from '@utils'
+import { CanDeleteUlasan } from './CanDeleteUlasan'
 
 interface UlasanDetailProps {
   ulasan: Ulasan
 }
 
 export const UlasanDetail: FC<UlasanDetailProps> = ({ ulasan }) => {
-  const { time, review, rating, foto, user } = ulasan
+  const { id, time, review, rating, foto, user, kantin } = ulasan
   const [userName, setUserName] = React.useState()
-
+  
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -71,6 +72,7 @@ export const UlasanDetail: FC<UlasanDetailProps> = ({ ulasan }) => {
             <span className="font-bold">Tanggal:</span> {time.slice(0, 10)}
           </Typography>
         </div>
+        <CanDeleteUlasan ulasanId={id} canteenId={kantin as unknown as string}/>
       </div>
     </div>
   )
