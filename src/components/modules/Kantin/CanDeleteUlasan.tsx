@@ -1,5 +1,4 @@
-import React, { FC } from 'react'
-import { CircularProgress } from '@mui/material'
+import React from 'react'
 import { Button } from '@mui/material'
 import { useUserProfile } from '@contexts'
 import { axiosInstance } from '@utils'
