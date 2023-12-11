@@ -11,12 +11,19 @@ import { Kantin } from './type'
 
 export const VerifyCanteen = () => {
   const [canteens, setCanteens] = React.useState<Kantin[]>([])
+
+  const redirectHome = () => {
+    window.location.replace('/')
+  }
   React.useEffect(() => {
     axiosInstance.get(`/kantin/unverified`).then((res) => {
       if (res.status == 200) {
         setCanteens(res.data)
-      } else {
-        toast.error('Something Wrong')
+      }
+    }).catch((error)=>{
+      toast.error(error.response.data.detail)
+      if(error.response.status == 403){
+        setTimeout(redirectHome, 1000)
       }
     })
   }, [])
@@ -36,7 +43,7 @@ export const VerifyCanteen = () => {
       .patch(`/kantin/verify/${id}`, data)
       .then((res) => {
         if (res.status == 200) {
-          toast.success(`${action} Kantin Regristration Success`)
+          toast.success(`${action} Kantin Registration Success`)
           setTimeout(refreshPage, 1000)
         }
       })
