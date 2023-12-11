@@ -8,7 +8,7 @@ interface KantinListProps {
 
 export const KantinList: FC<KantinListProps> = ({ kantins }) => {
   return (
-    <div>
+    <div className="flex flex-wrap gap-4 py-3">
       {kantins.map((kantin) => (
         <KantinShortDetail key={kantin.id} kantin={kantin} />
       ))}

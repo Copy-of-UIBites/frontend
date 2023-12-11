@@ -10,6 +10,7 @@ import {
 } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { KantinFavorit } from './KantinFavorit'
 
 export const ProfileUser = () => {
   const { user } = useUserProfile()
@@ -20,8 +21,8 @@ export const ProfileUser = () => {
       {!user ? (
         <CircularProgress />
       ) : (
-        <div className="flex justify-center mt-10">
-          <Card className="max-w-xs w-full">
+        <div className="flex mt-10 flex-row gap-5">
+          <Card className="max-w-xs w-full sticky top-0 h-full">
             <CardContent className="flex flex-col items-center  p-4">
               <Avatar
                 alt={user.nama}
@@ -52,6 +53,7 @@ export const ProfileUser = () => {
               )}
             </CardContent>
           </Card>
+          <KantinFavorit role={user?.role} />
         </div>
       )}
     </div>

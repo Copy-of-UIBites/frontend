@@ -24,7 +24,7 @@ export const KantinDetail: FC<KantinDetailProps> = ({
   kantin,
   addToFavorites,
 }) => {
-  const { nama, deskripsi, lokasi, menu } = kantin
+  const { nama, deskripsi, lokasi, menu, status_verifikasi } = kantin
   const [ulasanList, setUlasanList] = React.useState([])
   const [isInFavorites, setIsInFavorites] = React.useState(false)
 
@@ -81,7 +81,7 @@ export const KantinDetail: FC<KantinDetailProps> = ({
   if (addToFavorites && isInFavorites === null) {
     return <CircularProgress />
   }
-    
+
   return (
     <div>
       <Typography variant="h3" gutterBottom>
@@ -131,6 +131,9 @@ export const KantinDetail: FC<KantinDetailProps> = ({
                   key={row.nama}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
+                  <TableCell component="th" scope="row">
+                    {row.nama}
+                  </TableCell>
                   <TableCell component="th" scope="row">
                     {row.deskripsi}
                   </TableCell>

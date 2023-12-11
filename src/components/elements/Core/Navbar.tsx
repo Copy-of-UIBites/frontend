@@ -11,7 +11,7 @@ export const Navbar = () => {
   const { user } = useUserProfile()
   const router = useRouter()
   return (
-    <div className="bg-rose-50 fixed w-full flex flex-row items-center justify-between px-10 py-4 shadow-md">
+    <div className="bg-rose-50 fixed z-[100] w-full flex flex-row items-center justify-between px-10 py-4 shadow-md">
       <Link href={'/'}>
         <Typography
           variant="h4"

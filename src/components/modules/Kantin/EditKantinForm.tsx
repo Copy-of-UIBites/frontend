@@ -69,7 +69,7 @@ export const EditKantinForm: FC<EditKantinFormProps> = ({
           variant="outlined"
           value={formData.lokasi}
           onChange={handleChange}
-          required
+          disabled
         />
         <TextField
           id="outlined-basic"

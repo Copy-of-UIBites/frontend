@@ -2,12 +2,13 @@ import { axiosInstance } from '@utils'
 import React, { FC, useEffect, useState } from 'react'
 import { Kantin } from '../Kantin/type'
 import { KantinList } from '../Kantin/KantinList'
+import { Typography } from '@mui/material'
 
-interface UserProfileProps {
+interface KantinFavoritProps {
   role: string
 }
 
-export const UserProfile: FC<UserProfileProps> = ({ role }) => {
+export const KantinFavorit: FC<KantinFavoritProps> = ({ role }) => {
   const [kantins, setKantins] = useState<Kantin[]>([])
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export const UserProfile: FC<UserProfileProps> = ({ role }) => {
     <div>
       {role == 'User' ? (
         <div>
-          <h2>Daftar Kantin Favorit</h2>
+          <Typography variant="h4">Daftar Kantin Favorit ⭐️</Typography>
           <KantinList kantins={kantins} />
         </div>
       ) : (

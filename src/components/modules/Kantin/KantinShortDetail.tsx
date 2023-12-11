@@ -10,7 +10,6 @@ export const KantinShortDetail: FC<KantinShortDetailProps> = ({ kantin }) => {
   const { id, nama, lokasi, deskripsi } = kantin
 
   const handleSeeDetails = () => {
-    // Navigate to the /kantin/${id} route using window.location.href
     window.location.href = `/kantin/${id}`
   }
 
