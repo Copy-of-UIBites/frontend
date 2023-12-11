@@ -10,10 +10,14 @@ import {
   TableBody,
   Button,
   CircularProgress,
+  Modal,
+  Box,
 } from '@mui/material'
 import { Kantin } from './type'
 import { axiosInstance } from '@utils'
 import { UlasanDetail } from './UlasanDetail'
+import { AddReviewForm } from './AddReviewForm'
+
 
 interface KantinDetailProps {
   kantin: Kantin
@@ -27,6 +31,8 @@ export const KantinDetail: FC<KantinDetailProps> = ({
   const { nama, deskripsi, lokasi, menu, status_verifikasi } = kantin
   const [ulasanList, setUlasanList] = React.useState([])
   const [isInFavorites, setIsInFavorites] = React.useState(false)
+
+  const [isOpenReviewForm, setIsOpenReviewForm] = React.useState(false)
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -143,6 +149,45 @@ export const KantinDetail: FC<KantinDetailProps> = ({
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Button
+        variant="outlined"
+        onClick={() => { setIsOpenReviewForm(true) }}
+        className="mb-4 mt-4"
+      >
+        Add Review
+      </Button>
+
+      <Modal
+        open={isOpenReviewForm}
+        onClose={() => { setIsOpenReviewForm(false) }}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={{
+          position: 'absolute' as 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 500,
+          bgcolor: 'background.paper',
+          boxShadow: 20,
+          p: 4,
+          borderRadius: 10,
+        }}>
+          <AddReviewForm kantin={kantin} />
+          <center>
+                    <Button
+                        variant="outlined"
+                        color='error'
+                        className="mb-4"
+                        onClick={()=>{setIsOpenReviewForm(false)}}
+                    >
+                        Cancel
+                    </Button>
+          </center>
+        </Box>
+      </Modal>
 
       {ulasanList.map((ulasan, index) => (
         <UlasanDetail key={index} ulasan={ulasan} />
