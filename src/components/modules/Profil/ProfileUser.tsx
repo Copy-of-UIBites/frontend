@@ -49,7 +49,7 @@ export const ProfileUser = () => {
                 <Button
                   variant="outlined"
                   onClick={() => {
-                    router.push('/edit')
+                    router.push('/profile/edit')
                   }}
                 >
                   Edit Profil
