@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import { Button, Typography } from '@mui/material'
 
@@ -9,19 +9,26 @@ import { EditKantinForm } from './EditKantinForm'
 import { axiosInstance } from '@utils'
 import { Kantin } from './type'
 import { KantinDetail } from './KantinDetail'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 
-export const OwnerKantinProfile = () => {
+interface OwnerKantinProfileProps {
+  role: string
+}
+export const OwnerKantinProfile: FC<OwnerKantinProfileProps> = ({ role }) => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [kantinData, setKantinData] = useState<Kantin | null>(null)
   const router = useRouter()
   useEffect(() => {
-    axiosInstance.get('/auth/kantin/me').then((res) => {
-      if (res.status == 200) {
-        const data = res.data as Kantin
-        setKantinData(data)
-      }
-    })
+    if (role == 'Pemilik Kantin') {
+      axiosInstance.get('/auth/kantin/me').then((res) => {
+        if (res.status == 200) {
+          const data = res.data as Kantin
+          setKantinData(data)
+        }
+      })
+    } else {
+      redirect('/')
+    }
   }, [])
 
   const handleDelete = () => {

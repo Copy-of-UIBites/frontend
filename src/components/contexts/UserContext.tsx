@@ -29,7 +29,9 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-
+    if (!!token && AUTH_URL.includes(pathname)) {
+      window.location.href = '/'
+    }
     if (!user && !AUTH_URL.includes(pathname) && !!token) {
       const storedUserData = localStorage.getItem('user')
       if (storedUserData) {
